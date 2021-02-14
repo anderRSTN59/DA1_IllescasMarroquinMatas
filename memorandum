@@ -1,16 +1,18 @@
-parte 1 del trabajo completada
-  prara la realizacion de la primera parte de trabajo se resolvio en el analisis individual del 
-    problema y la presentacion de soluciones por parte de cada uno de los integrantes de grupo
-    
+Parte 1 del trabajo completada
+  Para la realización de la primera parte de trabajo se resolvió en el análisis individual del 
+    problema y la presentación de soluciones por parte de cada uno de los integrantes de grupo,
+    a excepción de mí (Anderson Marroquín Rivas, "anderRSTN59") ningún otro miembro ha presentado
+    o aportado a esta parte del trabajo
+
   se ha implementado todo lo necesario para la lectura de los .graphml usando DOM:
-    uso de DOM frente a SAX por major adaptabilidad por mi parte (Anderson)
-  se han implementado clases propias para la generacion del grafo, nodos y aristas
-    se cometo el que no podiamos usar las predeterminadas por el lenguaje por lo que he implamentado 
+    uso de DOM frente a SAX por mayor adaptabilidad por mi parte (Anderson)
+  se han implementado clases propias para la generación del grafo, nodos y aristas
+    se cometo el que no podemos usar las predeterminadas por el lenguaje por lo que he implementado 
       unas clases arcaicas para el comienzo del trabajo
-  se han implementado opciones basicas de acceso a los datos (nostar nodo, mostrar aristas, ...)
-    se suguiro en clase que implemetasemos agunos metodos para compobar el correcto acceso a los
-      datos, he optado por mostrar tanto los nodos como las arista de un grago determinado, como 
-      tambien de una linea con datos basicos del grafo (los que se piden para esta primera entraga)
-  se ha implementado la opcion de leer un directorio completo de .graphml
-  se ha implementado el guardado de las lineas de datos de un conjunto de .graphml
+  se han implementado opciones básicas de acceso a los datos (mostrar nodo, mostrar aristas, ...)
+    se sugirió en clase que implementásemos algunos métodos para comprobar el correcto acceso a los
+      datos, he optado por mostrar tanto los nodos como las arista de un grafo determinado, como 
+      también de una línea con datos básicos del grafo (los que se piden para esta primera entrega)
+  se ha implementado la opción de leer un directorio completo de .graphml
+  se ha implementado el guardado de las líneas de datos de un conjunto de .graphml
   
