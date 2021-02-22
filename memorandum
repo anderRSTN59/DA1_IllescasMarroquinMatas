@@ -16,3 +16,9 @@ Parte 1 del trabajo completada
   se ha implementado la opción de leer un directorio completo de .graphml
   se ha implementado el guardado de las líneas de datos de un conjunto de .graphml
   
+Parte 2 del trabajo en proceso
+  omitir temporalmente la leectura de datos que no son node(id, x, y) y edge (id, origen, destino, longitud)
+  unificar clase grafo y la lectura
+  crear escritura/edicion de grafo en .graphml
+  crear guardado de grafo en .graphml
+  dibujar grafo en fromato vectorial (.svg con liberia "network") o png 
