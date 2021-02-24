@@ -1,18 +1,18 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+from xml.dom import minidom
+from os import listdir
+from MyNode import MyNode
+from MyEdge import MyEdge
+
 class MyGraph:
-    streets_per_node = ""
-    simplified = False
-    crs = ""
     name = ""
     node_list = ""
     edge_list = ""
-    def __init__(self, name, crs, simplified, streets_per_node, node_list, edge_list):
+
+    def __init__(self, name, node_list, edge_list):
         self.name = name
-        self.crs = crs
-        self.simplified = simplified
-        self.streets_per_node = streets_per_node
         self.node_list = node_list
         self.edge_list = edge_list
 
@@ -33,3 +33,62 @@ class MyGraph:
             if (node_coords[1] % 2) == 1:
                 odd_y_cosrds = odd_y_cosrds + 1
         return population[0], n_nodes, n_edges, edge_total_len, even_x_cosrds, odd_y_cosrds
+
+def read_xmlfile (xmlfile):
+    '''lee el archivo .graphml'''
+    xmldom = minidom.parse(open(xmlfile))
+    graph_keys_data = xmldom.getElementsByTagName("key")
+    graph_keys = read_keys (graph_keys_data)
+    node_list = read_nodes(xmlfile, graph_keys)
+    edge_list = read_edges(xmlfile, graph_keys)
+
+    return MyGraph (get_graph_name, node_list, edge_list)
+
+def read_keys (graph_keys_data):
+    '''lee las keys del grafo contenidas en el .graphml'''
+    keys = []
+    for key in graph_keys_data:
+        keys.append([key.getAttribute("id"),key.getAttribute("attr.name")])
+    return keys
+
+def get_graph_name (xmldom): #revisar
+    '''genera el grafo del .graphml'''
+    name = ""
+    graph_data = xmldom.getElementsByTagName("data")
+    graph_data = graph_data[len(graph_data)-4:]
+    for data in graph_data:
+        if data.getAttribute("key") == "d0":
+            name = data.firstChild.data
+    
+    return name
+
+def read_nodes (xmldom, graph_keys):
+    '''lee los nodos del grafo y genera una lista de nodos'''
+    nodes = []
+    graph_nodes_data = xmldom.getElementsByTagName("node")
+    for node in graph_nodes_data:
+        new_node = MyNode(node.getAttribute("id"))
+        nodes.append(read_object_attr (graph_keys, new_node, node.getElementsByTagName("data")))
+    return nodes
+
+def read_edges (xmldom, graph_keys):
+    '''lee las aristas del grafo y genera una lista de aristas'''
+    edges = []
+    graph_edges_data = xmldom.getElementsByTagName("edge")
+    for edge in graph_edges_data:
+        new_edge = MyEdge(
+            edge.getAttribute("id"),
+            edge.getAttribute("source"),
+            edge.getAttribute("target"))
+        edges.append(read_object_attr (graph_keys, new_edge, edge.getElementsByTagName("data")))
+    return edges
+
+def read_object_attr (graph_keys, element, attribute_list):
+    '''lee los atributos/datos de los objetos del grafo'''
+    data = {}
+    for attr in attribute_list:
+        for key in graph_keys:
+            if key[0] == attr.getAttribute("key"):
+                data[key[1]] = attr.firstChild.data
+    element.data = data
+    return element
