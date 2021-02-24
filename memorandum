@@ -18,7 +18,9 @@ Parte 1 del trabajo completada
   
 Parte 2 del trabajo en proceso
   omitir temporalmente la leectura de datos que no son node(id, x, y) y edge (id, origen, destino, longitud)
-  unificar clase grafo y la lectura
   crear escritura/edicion de grafo en .graphml
   crear guardado de grafo en .graphml
-  dibujar grafo en fromato vectorial (.svg con liberia "network") o png 
+  dibujar grafo en fromato vectorial (.svg con liberia "network") o png
+  
+  FINALIZADO: unificar clase grafo y la lectura
+  
