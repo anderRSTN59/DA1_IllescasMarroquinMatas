@@ -37,10 +37,12 @@ class MyGraph:
 def read_xmlfile (xmlfile):
     '''lee el archivo .graphml'''
     xmldom = minidom.parse(open(xmlfile))
+    graph_nodes_data = xmldom.getElementsByTagName("node")
+    graph_edges_data = xmldom.getElementsByTagName("edge")
     graph_keys_data = xmldom.getElementsByTagName("key")
     graph_keys = read_keys (graph_keys_data)
-    node_list = read_nodes(xmlfile, graph_keys)
-    edge_list = read_edges(xmlfile, graph_keys)
+    node_list = read_nodes(xmlfile, graph_keys, graph_nodes_data)
+    edge_list = read_edges(xmlfile, graph_keys, graph_edges_data)
 
     return MyGraph (get_graph_name, node_list, edge_list)
 
@@ -62,19 +64,17 @@ def get_graph_name (xmldom): #revisar
     
     return name
 
-def read_nodes (xmldom, graph_keys):
+def read_nodes (xmldom, graph_keys, graph_nodes_data):
     '''lee los nodos del grafo y genera una lista de nodos'''
     nodes = []
-    graph_nodes_data = xmldom.getElementsByTagName("node")
     for node in graph_nodes_data:
         new_node = MyNode(node.getAttribute("id"))
         nodes.append(read_object_attr (graph_keys, new_node, node.getElementsByTagName("data")))
     return nodes
 
-def read_edges (xmldom, graph_keys):
+def read_edges (xmldom, graph_keys, graph_edges_data):
     '''lee las aristas del grafo y genera una lista de aristas'''
     edges = []
-    graph_edges_data = xmldom.getElementsByTagName("edge")
     for edge in graph_edges_data:
         new_edge = MyEdge(
             edge.getAttribute("id"),
