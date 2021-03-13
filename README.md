@@ -11,6 +11,6 @@ run: $ python3 AD_1_laboratorio.py [-h] [-line inputFile] [-draw inputFile] [-no
   
   [-nodes inputFile] muestra el id, y las cordenadas enteras de todos los nodos de un grafo dado por un archivo de entrada
   
-  [-edges inputFile] muestra el id, y el nodo origen y el nodo destino de todas las aristas de un grafo dado por un archivo de entrada
+  [-edges inputFile] muestra el id, el nodo origen, el nodo destino de todas las aristas de un grafo dado por un archivo de entrada ordenados por longitud de la arista
   
   [-graphs rute] crea un archivo .txt que contiene una lista formada por linas de informacion de los grafos dado un directorio
