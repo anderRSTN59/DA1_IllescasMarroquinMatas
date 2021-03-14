@@ -1,1 +1,0 @@
-<Población>,<nº nodos>,<nº arcos>,<Longitud total de los arcos>,<nº coord X pares>,<nº de coord Y impares> 
