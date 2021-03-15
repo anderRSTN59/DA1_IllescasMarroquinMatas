@@ -13,3 +13,6 @@ class MyNode:
     def pass_to_integer_coords (self):
         '''pasa las coordenatas de srt a una tupla de ints'''
         return int(self.node_coords[0]), int(self.node_coords[1])
+
+    def getID(self):
+        return int(self.node_id)

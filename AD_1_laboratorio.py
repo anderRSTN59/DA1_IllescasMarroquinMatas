@@ -9,6 +9,7 @@ from MyGraph import MyGraph, read_xmlfile
 from MyNode import MyNode
 from MyEdge import MyEdge
 from MyQueue import MyQueue
+base = dict()
 
 def create_graph_img (graph):
     '''metodo que genera la imagen del grafo'''
@@ -115,6 +116,57 @@ def create_txt_solution (rute):
         txt_file.write("\n")
     txt_file.close()
 
+def iniciarKruskal (rute):
+    for element in listdir(rute):
+        
+        graph = read_xmlfile(rute + element)
+        
+        
+        kruskal(graph)
+
+'''Metodo recursivo que devuelve la cabeza del grupo conexo'''
+def findParentKruskal(nodeIDstr):
+    if base[nodeIDstr] == nodeIDstr :
+        return nodeIDstr
+    return findParentKruskal(base[nodeIDstr])
+
+def kruskal (graph):    
+    
+    ARC= []
+    base.clear()
+
+    listaAristas = MyQueue()
+    listaAristas.copy_list(graph.edge_list)
+    listaAristas.element_list.reverse()
+    
+    '''Inicia el diccionario, indicando que la cabeza de cada grupo conexo es el mismo nodo en si '''
+    for i in range(0, len(graph.node_list)):        
+        base[str(graph.node_list[i].node_id)] = graph.node_list[i].node_id
+    
+    '''itera mientras queden aristas sin comprobar'''
+    while len(listaAristas.element_list) > 0:
+
+        edge = listaAristas.element_list.pop()
+        
+        nSource = findParentKruskal(str(edge.source))
+        nTarget = findParentKruskal(str(edge.target))
+        if nSource != nTarget:
+            base[nTarget] = nSource
+            
+            ARC.append(edge)
+        
+            
+            
+    for element in ARC:
+        print(element)
+    print("-------------------------------------------------------")
+    print("                          FIN")
+
+
+
+
+    
+
 def parse_command_line (argv):
     '''controla el paso de parametros'''
     try:
@@ -138,6 +190,8 @@ def parse_command_line (argv):
                     print(edge)
             elif opt == "-graphs":
                 create_txt_solution(argv[-1])
+            elif opt == "-kruskal":
+                iniciarKruskal(argv[-1])
             elif opt == "-draw":
                 graph = read_xmlfile(argv[-1])
                 create_graph_img (graph)
