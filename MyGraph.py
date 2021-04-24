@@ -4,6 +4,7 @@
 #pylint: disable-msg=c0103
 #pylint: disable-msg=c0114
 
+import time
 from xml.dom import minidom
 #import networkx as nx
 #import matplotlib.pyplot as plt
