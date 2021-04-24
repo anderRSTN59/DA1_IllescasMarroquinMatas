@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+#pylint: disable-msg=c0103
+#pylint: disable-msg=c0114
+
 class MyNode:
     '''implementacion de clase nodo grafo'''
     def __init__(self, node_id):
