@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+#pylint: disable-msg=c0103
+#pylint: disable-msg=c0114
+
 class MyEdge:
     '''implementacion de clase arista grafo'''
     def __init__(self, edge_id, source, target):
