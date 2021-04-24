@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+#pylint: disable-msg=c0103
+#pylint: disable-msg=c0114
+
 class MyQueue:
     '''implementacion de clase lista ordenada'''
     def __init__(self):
@@ -30,7 +33,7 @@ class MyQueue:
         while i < j:
             while (self.element_list[i].length <= pivote.length) & (i < j):
                 i = i + 1
-            while (self.element_list[j].length > pivote.length):
+            while self.element_list[j].length > pivote.length:
                 j = j - 1
             if i < j:
                 aux = self.element_list[i]
