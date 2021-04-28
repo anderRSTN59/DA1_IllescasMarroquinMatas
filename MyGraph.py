@@ -68,11 +68,10 @@ def read_nodes (xmldom):
         new_node.node_coords = coord_x, coord_y
         nodes.append(new_node)
     return nodes
-
 def read_edges (xmldom):
     '''lee las aristas del grafo y genera una lista de aristas'''
     graph_edges = xmldom.getElementsByTagName("edge")
-    length_id, geometry_id = read_edge_keys (xmldom)
+    osmid_id, length_id, geometry_id = read_edge_keys (xmldom)
     edges = []
     for edge in graph_edges:
         new_edge = MyEdge(
@@ -81,7 +80,9 @@ def read_edges (xmldom):
             edge.getAttribute("target"))
         edge_attr_list = edge.getElementsByTagName("data")
         for attr in edge_attr_list:
-            if length_id == attr.getAttribute("key"):
+            if osmid_id == attr.getAttribute("key"):
+                new_edge.edge_id = attr.firstChild.data
+            elif length_id == attr.getAttribute("key"):
                 new_edge.length = float(attr.firstChild.data)
             elif geometry_id == attr.getAttribute("key"):
                 new_edge.geometry = get_edge_geometry(attr.firstChild.data)
@@ -91,14 +92,17 @@ def read_edges (xmldom):
 def read_edge_keys (xmldom):
     '''lee las keys del grafo contenidas en el .graphml'''
     graph_keys = xmldom.getElementsByTagName("key")
+    osmid_id = ""
     length_id = ""
     geometry_id = ""
     for key in graph_keys:
+        if key.getAttribute("attr.name") == "osmid" and key.getAttribute("for") == "edge":
+            osmid_id = key.getAttribute("id")
         if key.getAttribute("attr.name") == "length":
             length_id = key.getAttribute("id")
         if key.getAttribute("attr.name") == "geometry":
             geometry_id = key.getAttribute("id")
-    return length_id, geometry_id
+    return osmid_id, length_id, geometry_id
 
 def get_edge_geometry (str_geometry):
     '''leer la forma de la arista'''
