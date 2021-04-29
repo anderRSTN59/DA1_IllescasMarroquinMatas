@@ -130,8 +130,8 @@ def create_graphml (graph):
     graphml_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
     graphml_file.write("\n<graphmlxmlns=\"http://graphml.graphdrawing.org/xmlns\"" +
                         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" + 
-                        "xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns\"" +
-                        " http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd>")
+                        "xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns" +
+                        " http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd>\"")
     graphml_file.write("\n<key attr.name=\"length\" attr.type=\"string\" for=\"edge\" id=\"d7\" />")
     graphml_file.write("\n<key attr.name=\"osmid\" attr.type=\"string\" for=\"node\" id=\"d6\" />")
     graphml_file.write("\n<key attr.name=\"osmid\" attr.type=\"string\" for=\"node\" id=\"d5\" />")
@@ -142,14 +142,14 @@ def create_graphml (graph):
     graphml_file.write("\n<key attr.name=\"name\" attr.type=\"string\" for=\"graph\" id=\"d0\" />")
     graphml_file.write("\n<graph edgedefault=\"directed\">")
     for node in nodes:
-        graphml_file.write("\n\t<node id=" + str(node.node_id) + ">")
+        graphml_file.write("\n\t<node id=\"" + str(node.node_id) + "\">")
         graphml_file.write("\n\t\t<data key=\"d3\">" + str(node.node_coords[1]) + "</data>")
         graphml_file.write("\n\t\t<data key=\"d4\">" + str(node.node_coords[0]) + "</data>")
         graphml_file.write("\n\t\t<data key=\"d5\">" + str(node.node_id) + "</data>\n\t</node>")
     for edge in edges:
-        graphml_file.write("\n\t<edge id=" + str(edge.edge_id) + 
-                            " source=" + str(edge.source) +
-                            " target=" +  str(edge.target) + ">")
+        graphml_file.write("\n\t<edge id=\"" + str(edge.edge_id) + 
+                            "\" source=\"" + str(edge.source) +
+                            "\" target=\"" +  str(edge.target) + "\">")
         graphml_file.write("\n\t\t<data key=\"d6\">" + str(int(time.time())) + "</data>")
         graphml_file.write("\n\t\t<data key=\"d7\">" + str(edge.length) + "</data>\n\t</edge>")
     graphml_file.write("\n\t<data key=\"d0\">Provincia de Ciudad Real</data>")
