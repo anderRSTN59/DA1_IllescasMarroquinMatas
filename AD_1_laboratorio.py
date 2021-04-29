@@ -35,10 +35,13 @@ def findParentKruskal(nodeIDstr):
 def kruskal_algorithm (graph):    
     
     ARC= []
-    base.clear()
+    '''Lista con las aristas del arbol resultado'''
+    base.clear() 
+    '''Diccionario Global'''
 
     listaAristas = MyQueue()
     listaAristas.copy_list(graph.edge_list)
+    '''Se copia la lista de aristas del grafo y se ordenan'''
     listaAristas.element_list.reverse()
     
     '''Inicia el diccionario, indicando que la cabeza de cada grupo conexo es el mismo nodo en si '''
@@ -53,13 +56,11 @@ def kruskal_algorithm (graph):
         nSource = findParentKruskal(str(edge.source))
         nTarget = findParentKruskal(str(edge.target))
         if nSource != nTarget:
+            '''Si la cabeza del grupo conexo es distinto significa que son miembros de diferentes grupos conexos'''
             base[nTarget] = nSource
-            
-            ARC.append(edge)
-        
-            
-            
-    
+            '''Asigna la cabeza al grupo conexo unido'''
+            ARC.append(edge)              
+                
     print("Terminado Kruskal de " + graph.name )
     print("-------------------------------------------------------")
     
