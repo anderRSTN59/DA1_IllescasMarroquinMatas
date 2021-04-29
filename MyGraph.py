@@ -127,7 +127,7 @@ def create_graphml (graph):
     nodes = graph.node_list
     edges = graph.edge_list
     graphml_file = open ('Graph_Of_Roots.graphml','w')
-    graphml_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
+    graphml_file.write("<?xml version='1.0' encoding='utf-8'?>")
     graphml_file.write("\n<graphmlxmlns=\"http://graphml.graphdrawing.org/xmlns\"" +
                         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" + 
                         "\nxsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns" +
