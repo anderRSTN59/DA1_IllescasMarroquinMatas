@@ -14,6 +14,7 @@ from MyGraph import MyGraph, read_xmlfile, create_graphml
 from MyNode import MyNode
 from MyEdge import MyEdge
 from MyQueue import MyQueue
+base = dict()
 
 def create_txt_solution (rute):
     '''crea un .txt que contiene una linea de datos de cada grafo de un dir'''
@@ -26,7 +27,45 @@ def create_txt_solution (rute):
         txt_file.write("\n")
     txt_file.close()
 
-def kruskal_algorithm (graph):
+def findParentKruskal(nodeIDstr):
+    if base[nodeIDstr] == nodeIDstr :
+        return nodeIDstr
+    return findParentKruskal(base[nodeIDstr])
+
+def kruskal_algorithm (graph):    
+    
+    ARC= []
+    base.clear()
+
+    listaAristas = MyQueue()
+    listaAristas.copy_list(graph.edge_list)
+    listaAristas.element_list.reverse()
+    
+    '''Inicia el diccionario, indicando que la cabeza de cada grupo conexo es el mismo nodo en si '''
+    for i in range(0, len(graph.node_list)):        
+        base[str(graph.node_list[i].node_id)] = graph.node_list[i].node_id
+    
+    '''itera mientras queden aristas sin comprobar'''
+    while len(listaAristas.element_list) > 0:
+
+        edge = listaAristas.element_list.pop()
+        
+        nSource = findParentKruskal(str(edge.source))
+        nTarget = findParentKruskal(str(edge.target))
+        if nSource != nTarget:
+            base[nTarget] = nSource
+            
+            ARC.append(edge)
+        
+            
+            
+    
+    print("Terminado Kruskal de " + graph.name )
+    print("-------------------------------------------------------")
+    
+    return ARC
+
+def kruskal_algorithm2 (graph):
     '''encuentra el arbol de recubrimiento usando Kruskal'''
     solution = []
     connected_components = create_connected_components(graph.node_list)
@@ -137,8 +176,8 @@ def create_both_trees (graph, scaled):
     '''crea las ambas imagenes del arbol de recubrimiento'''
     kuscal_tree = kruskal_algorithm (graph)
     prim_tree = prim_algorithm (graph)
-    create_tree_img (graph, kuscal_tree, "_Kruskal_", scale)
-    create_tree_img (graph, prim_tree, "_Prim_", scale)
+    create_tree_img (graph, kuscal_tree, "_Kruskal_", scaled)
+    create_tree_img (graph, prim_tree, "_Prim_", scaled)
 
 def found_root(node_list, edge_list):
     '''busca el nodo raiz que divida el grafo en subgrafos de similar peso'''
@@ -241,7 +280,7 @@ def create_root_graph_nodes (rute):
     nodes = []
     for element in listdir(rute):
         graph = read_xmlfile(rute + element)
-        edge_tree = prim_algorithm (graph)
+        edge_tree = kruskal_algorithm (graph)
         nodes.append(found_root (graph.node_list, edge_tree))
     return nodes
 
@@ -272,7 +311,7 @@ def create_root_list (rute):
     txt_file.write("\n")
     for element in listdir(rute):
         graph = read_xmlfile(rute + element)
-        edge_tree = prim_algorithm (graph)
+        edge_tree = kruskal_algorithm(graph)
         txt_file.write(graph.name + ", " + str(found_root (graph.node_list, edge_tree)))
         txt_file.write("\n")
     txt_file.close()
@@ -352,7 +391,7 @@ def parse_command_line (argv):
                 create_both_trees (graph, 30000)
         elif opt == "-root":
             graph = read_xmlfile(argv[-1])
-            edge_tree = prim_algorithm (graph)
+            edge_tree = kruskal_algorithm (graph)
             root = found_root (graph.node_list, edge_tree)
             create_root_img (graph, edge_tree, root, scale)
             print (root)
