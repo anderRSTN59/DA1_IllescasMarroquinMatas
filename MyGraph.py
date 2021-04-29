@@ -130,8 +130,8 @@ def create_graphml (graph):
     graphml_file.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>")
     graphml_file.write("\n<graphmlxmlns=\"http://graphml.graphdrawing.org/xmlns\"" +
                         "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" + 
-                        "xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns" +
-                        " http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd>\"")
+                        "\nxsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns" +
+                        " http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\">")
     graphml_file.write("\n<key attr.name=\"length\" attr.type=\"string\" for=\"edge\" id=\"d7\" />")
     graphml_file.write("\n<key attr.name=\"osmid\" attr.type=\"string\" for=\"node\" id=\"d6\" />")
     graphml_file.write("\n<key attr.name=\"osmid\" attr.type=\"string\" for=\"node\" id=\"d5\" />")
